@@ -3,11 +3,11 @@
 #include <stdlib.h>
 
 struct item_ {
-    float valor;
-    float peso;
+    int valor;
+    int peso;
 };
 
-ITEM* item_criar(float valor, float peso) {
+ITEM* item_criar(int valor, int peso) {
     ITEM* item = (ITEM*) malloc(sizeof(ITEM));
 
     if (item != NULL) {
