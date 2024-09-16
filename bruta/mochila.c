@@ -8,7 +8,7 @@ struct mochila{
     int tam_max;
 };
 
-MOCHILA* mochila_criar(ITEM* itens, float W, int tam_max){
+MOCHILA* mochila_criar(ITEM* itens, int W, int tam_max){
     MOCHILA* mochila = (MOCHILA*) malloc(sizeof(MOCHILA) * tam_max);
 
     if(mochila != NULL){
