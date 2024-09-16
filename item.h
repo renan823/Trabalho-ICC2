@@ -3,7 +3,7 @@
 
     typedef struct item_ ITEM;
 
-    ITEM* item_criar(float valor, float peso);
+    ITEM* item_criar(int valor, int peso);
     void item_apagar(ITEM** item);
 
     float item_get_valor(ITEM* item);
