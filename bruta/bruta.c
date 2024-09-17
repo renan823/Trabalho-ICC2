@@ -1,24 +1,57 @@
+/**
+ * Código para resolver o problema da mochila com o método da força bruta
+ * 
+ * @author Augusto Fernandes Ildefonso
+ * @date 17/09/2024
+ */
 #include <stdio.h>
 #include <stdlib.h>
 
-#define TAM_MAX 1000000
+#define TAM_MAX 1000000 // Definindo o tamanho máximo da mochila
 
+/**
+ * Protótipos das funções
+ */
 int* forca_bruta(int peso[], int valor[], int N, int W, int mochila[]);
-void inicia_vetor(int** aux, int N);
+void zera_vetor(int** aux, int N);
 void copia_vetor(int** mochila, int** aux, int N);
 
-void inicia_vetor(int** aux, int N){
+/**
+ * Função que zera o vetor, é usada para gerar todas as possibilidades de combinações dos itens
+ * 
+ * @param aux Ponteiro para o vetor auxiliar
+ * @param N Tamanho da mochila
+ */
+void zera_vetor(int** aux, int N){
     for(int i = 0; i < N; i++){
         (*aux)[i] = 0; 
     }
 }
 
+/**
+ * Função que copia o vetor aux para o vetor mochila
+ * 
+ * @param mochila Ponteiro para o vetor mochila
+ * @param aux Ponteiro para o vetor aux
+ * @param N Tamanho da mochila
+ */
 void copia_vetor(int** mochila, int** aux, int N){
     for(int i = 0; i < N; i++){
         (*mochila)[i] = (*aux)[i];
     }
 }
 
+/**
+ * Função que resolve o problema da mochila usando o método da força dupla
+ * 
+ * @param peso Vetor que contém os pesos dos itens
+ * @param valor Vetor que contém os valores dos itens
+ * @param N Tamanho da mochila
+ * @param W Peso máximo que a mochila suporta
+ * @param mochila Vetor que representa a mochila
+ * 
+ * @return Retorna a mochila que contém o maior valor, dentro do peso máximo
+ */
 int* forca_bruta(int peso[], int valor[], int N, int W, int mochila[]){
     int total_combinacoes = 1 << N;
     int peso_atual = 0, valor_atual = 0, maior_valor = 0, peso_maior_valor;
@@ -27,7 +60,7 @@ int* forca_bruta(int peso[], int valor[], int N, int W, int mochila[]){
     aux = (int*) malloc(sizeof(int) * N);
 
     for(int i = 0; i < total_combinacoes; i++){
-        inicia_vetor(&aux, N);
+        zera_vetor(&aux, N);
         peso_atual = 0;
         valor_atual = 0;
         for(int j = 0; j < N; j++){
@@ -58,7 +91,7 @@ int main(void){
     printf("Peso máximo da mochila: ");
     scanf("%d", &W);
 
-    mochila = (int*) malloc(sizeof(int)*N);
+    mochila = (int*) calloc(sizeof(int), N);
 
     for(int i = 0; i < N; i++){
         printf("\nPeso %d: ", i);
@@ -66,8 +99,6 @@ int main(void){
         printf("Valor %d: ", i);
         scanf("%d", &valor[i]);
     }
-
-    inicia_vetor(&mochila, N);
 
     mochila = forca_bruta(peso, valor, N, W, mochila);
 
