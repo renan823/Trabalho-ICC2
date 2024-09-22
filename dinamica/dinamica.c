@@ -7,6 +7,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 /*
 Cria uma matriz de inteiros usando os tamanhos especificados.
@@ -135,11 +136,6 @@ void mochila(int p[], int v[], int n, int c, int** resultado, int* total) {
         }
     }
 
-    //Exibir a matriz (tabela) gerada?
-    printf("\n");
-    matriz_print(matriz, n+1, c+1);
-    printf("\n");
-
     int j = c;
     for (int i = n; i > 0; i--) {
         if (matriz[i][j] == matriz[i-1][j]) {
@@ -173,7 +169,15 @@ int main(void) {
     int pTotal = 0;
     int *res = (int*) criar_vetor(N, sizeof(int));
 
+    //inicar contagem
+    clock_t inicio = clock();
+
     mochila(P, V, N, C, &res, &vTotal);
+
+    //fim da execução
+    clock_t fim = clock();
+
+    printf("Tempo decorrido: %lf segundos\n", (double)(fim - inicio) / CLOCKS_PER_SEC);
 
     printf("Mochila: (");
     for(int i = 0; i < N; i++){

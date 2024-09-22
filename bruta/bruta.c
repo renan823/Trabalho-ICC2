@@ -4,6 +4,7 @@
  * @author Augusto Fernandes Ildefonso
  * @date 17/09/2024
  */
+#include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -86,21 +87,23 @@ int main(void){
     int N, W;
     int peso[TAM_MAX], valor[TAM_MAX], *mochila;
 
-    printf("Tamanho da mochila: ");
-    scanf("%d", &N);
-    printf("Peso máximo da mochila: ");
-    scanf("%d", &W);
+    scanf("%d %d", &N, &W);
 
     mochila = (int*) calloc(sizeof(int), N);
 
     for(int i = 0; i < N; i++){
-        printf("\nPeso %d: ", i);
-        scanf("%d", &peso[i]);
-        printf("Valor %d: ", i);
-        scanf("%d", &valor[i]);
+        scanf("%d %d", &peso[i], &valor[i]);
     }
 
+    //inicar contagem
+    clock_t inicio = clock();
+
     mochila = forca_bruta(peso, valor, N, W, mochila);
+
+    //fim da execução
+    clock_t fim = clock();
+
+    printf("Tempo decorrido: %lf segundos\n", (double)(fim - inicio) / CLOCKS_PER_SEC);
 
     printf("Mochila: (");
     for(int i = 0; i < N; i++){

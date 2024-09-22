@@ -5,6 +5,7 @@
  * @date 20/09/2024
 */
 
+#include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -72,7 +73,15 @@ int main(void) {
     ITEM* resultado = (ITEM*) malloc(N * sizeof(ITEM)); // Resultado
     int total = 0;
 
+    //inicar contagem
+    clock_t inicio = clock();
+
     mochila(items, N, C, &total, resultado);
+
+    //fim da execução
+    clock_t fim = clock();
+
+    printf("Tempo decorrido: %lf segundos\n", (double)(fim - inicio) / CLOCKS_PER_SEC);
 
     printf("Mochila:\n");
     for (int i = 0; i < total; i++) {
